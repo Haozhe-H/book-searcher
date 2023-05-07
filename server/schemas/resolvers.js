@@ -40,21 +40,20 @@ const resolvers = {
     },
 
     addUser: async (parent, args) => {
-      try {
-        const user = await User.create(args);
-        const token = signToken(user);
+      // try {
+      const user = await User.create(args);
+      const token = signToken(user);
 
-        return { token, user };
-      } catch (err) {
-        console.log(err);
-      }
+      return { token, user };
+      // } catch (err) {
+      //   console.log(err);
     },
 
-    saveBook: async (parent, { bookData }, context) => {
+    saveBook: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: bookData } },
+          { $addToSet: { savedBooks: args.input } },
           { new: true }
         ).populate("books");
 
@@ -64,11 +63,11 @@ const resolvers = {
       throw new AuthenticationError("Please login first.");
     },
 
-    removeBook: async (parent, { bookId }, context) => {
+    removeBook: async (parent, args, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: bookId } },
+          { $pull: { savedBooks: args.bookId } },
           { new: true }
         );
 

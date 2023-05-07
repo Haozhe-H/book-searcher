@@ -15,7 +15,7 @@ const SignupForm = () => {
     password: "",
   });
   // set state for form validation
-  const [validated] = useState(false);
+  const [validated] = useState(true);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
