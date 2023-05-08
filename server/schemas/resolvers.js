@@ -40,13 +40,16 @@ const resolvers = {
     },
 
     addUser: async (parent, args) => {
-      // try {
-      const user = await User.create(args);
-      const token = signToken(user);
+      try {
+        const user = await User.create(args);
+        const token = signToken(user);
 
-      return { token, user };
-      // } catch (err) {
-      //   console.log(err);
+        console.log(token);
+        
+        return { token, user };
+      } catch (err) {
+        console.log(err);
+      }
     },
 
     saveBook: async (parent, args, context) => {

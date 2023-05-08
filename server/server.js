@@ -15,6 +15,8 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
+// server.applyMiddleware({ app });
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -38,6 +40,13 @@ const startApolloServer = async (typeDefs, resolvers) => {
     });
   });
 };
+
+// db.once("open", () => {
+//   app.listen(PORT, () => {
+//     console.log(`🌍 API server running on port ${PORT}!`);
+//     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+//   });
+// });
 
 // call function to start server
 startApolloServer(typeDefs, resolvers);
