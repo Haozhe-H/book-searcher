@@ -6,17 +6,18 @@ const expiration = "2h";
 
 module.exports = {
   // function for our authenticated routes
-  authMiddleware: function (req, res, next) {
+  authMiddleware: function ({ req }) {
     // allows token to be sent via  req.query or headers
     let token = req.query.token || req.headers.authorization || req.body.token;
 
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
-      token = token.split(' ').pop().trim();
+      token = token.split(" ").pop().trim();
     }
 
     if (!token) {
-      return res.status(400).json({ message: 'You have no token!' });
+      // return res.status(400).json({ message: "You have no token!" });
+      return req;
     }
 
     // verify token and get user data out of it
@@ -24,12 +25,12 @@ module.exports = {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
-      console.log('Invalid token');
-      return res.status(400).json({ message: 'invalid token!' });
+      console.log("Invalid token");
+      // return res.status(400).json({ message: "invalid token!" });
     }
 
     // send to next endpoint
-    next();
+    return req;
   },
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };
@@ -37,33 +38,3 @@ module.exports = {
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };
-
-// const context = ({ req }) => {
-//   // allows token to be sent via  req.query or headers
-//   let token = req.headers.authorization || "";
-
-//   if (token.startsWith("Bearer ")) {
-//     // Remove Bearer from string
-//     token = token.slice(7, token.length).trimLeft();
-//   }
-
-//   if (!token) {
-//     return { user: null };
-//   }
-
-//   try {
-//     const { data } = jwt.verify(token, secret, { maxAge: expiration });
-//     return { user: data };
-//   } catch (err) {
-//     console.log("Invalid token", err);
-//     return { user: null };
-//   }
-// };
-
-// module.exports = {
-//   authMiddleware: context,
-//   signToken: function ({ username, email, _id }) {
-//     const payload = { username, email, _id };
-//     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-//   },
-// };
