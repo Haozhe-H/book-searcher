@@ -2,7 +2,7 @@
 
 ## Description:
 
-### This is a social network api allow user to add new user, connect friend, add thoughts and reaction for thoughts, user can also update their information as needed, using express and Mongoose.
+### This is a book searching application that allow user to login, search books and save books using MERN.
 
 ## Table of Content
 
@@ -22,11 +22,11 @@
 
 ## Installation:
 
-### To install this application, first run `npm i` to install all the required packages, then run `npm run start` to run this application. Once the application is running, user can go to Insomnia to work with the api.
+### N/A
 
 ## Usage:
 
-### After installation, run `npm run start` to start the application, then goes to insomnia, enter the port, then user can check, add, update and delete users, thoughts, friends and reaction. For more information please visit this walk-throught video: https://watch.screencastify.com/v/uj3qXotD4MuGkZcl41Da
+### To use this application, user can search for books either login or not, but user can only save books after login, and user can click "Viewing saved books" to check their saved books. ![screenshot](./client/public/assets/screenshot.JPG)
 
 ## Credits:
 
@@ -38,7 +38,7 @@
 
 ## Features:
 
-### This application allow user to view, add, update and delete users, thoughts, firends and reactions base on their needs, and when changes are made, Mongoose database will be updated so users can always track their changes.
+### This application allow user to search books based on book title, save and remove saved books after login. To view the application please visit: ---
 
 ## Contributors:
 
@@ -50,4 +50,4 @@
 
 ## Questions:
 
-### Github: https://github.com/Haozhe-H/Mongoose-social-network
+### Github: https://github.com/Haozhe-H/book-searcher
